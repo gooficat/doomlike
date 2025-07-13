@@ -4,9 +4,9 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 
-unsigned int WIDTH, HEIGHT;
+extern unsigned int WIDTH, HEIGHT, FPS;
 
-unsigned int FPS;
+extern double FOV;
 
 extern SDL_Scancode move_forward;
 extern SDL_Scancode move_backward;

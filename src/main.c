@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	w_init(WIDTH, HEIGHT);
 	r_init(w_get(), &game_state);
 	
-	sector_t s0 = r_createSector(10, 0, 0xffffff, 0xcccccc, 0xff00ff);
+	sector_t s0 = r_createSector(10, 0, 0xd6382d, 0xf54236, 0x9c2921);
 	
 	int s1v[4*4] = {
 		70, 220, 100, 220,
@@ -35,6 +35,13 @@ int main(int argc, char **argv)
 		100, 240, 70, 240,
 		70, 240, 70, 220
 	};
+	
+	for (int i = 0; i < 16; i += 4) {
+		wall_t w = r_createWall(s1v[i], s1v[i+1], s1v[i+2], s1v[i+3]);
+		r_sectorAddWall(&s0, w);
+	}
+	
+	r_queueSector(&s0);
 	
 	gameRun(&game_state, &player);
 	

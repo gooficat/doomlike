@@ -9,6 +9,7 @@
 #include "player.h"
 #include "game_state.h"
 #include "utils.h"
+#include "settings.h"
 
 typedef struct {
 	int t[1024];

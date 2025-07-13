@@ -1,5 +1,7 @@
 #include "keyboard.h"
 
+SDL_Event event;
+bool keys[512];
 double SPEED = 150.0;
 double ELEV_SPEED = 500 * 100;
 double ROT_SPEED = 4;
@@ -20,6 +22,7 @@ void k_handleEvents(game_state_t* game_state, player_t* player) {
 		default:
 			break;
 	}
+	k_processKeystates(player, game_state->delta_time);
 }
 void k_processKeystates(player_t* player, double deltaTime) {
 	if (keys[move_forward]) {
@@ -31,12 +34,12 @@ void k_processKeystates(player_t* player, double deltaTime) {
 		player->position.y -= SPEED * sin(player->dir_angle) * deltaTime;		
 	}
 	if (keys[strafe_left]) {
-		player->position.x += SPEED * cos(player->dir_angle) * deltaTime;
-		player->position.y += SPEED * sin(player->dir_angle) * deltaTime;
+		player->position.x += SPEED * cos(player->dir_angle + M_PI/2) * deltaTime;
+		player->position.y += SPEED * sin(player->dir_angle + M_PI/2) * deltaTime;
 	}
 	if (keys[strafe_right]) {
-		player->position.x += SPEED * cos(player->dir_angle) * deltaTime;
-		player->position.y += SPEED * sin(player->dir_angle) * deltaTime;
+		player->position.x += SPEED * cos(player->dir_angle - M_PI/2) * deltaTime;
+		player->position.y += SPEED * sin(player->dir_angle - M_PI/2) * deltaTime;
 	}
 	if (keys[move_left]) {
 		player->dir_angle += ROT_SPEED * deltaTime;

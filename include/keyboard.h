@@ -9,11 +9,11 @@
 #include "player.h"
 #include "settings.h"
 
-SDL_Event event;
-bool keys[512];
-double SPEED;
-double ELEV_SPEED;
-double ROT_SPEED;
+extern SDL_Event event;
+extern bool keys[512];
+extern double SPEED;
+extern double ELEV_SPEED;
+extern double ROT_SPEED;
 
 
 void k_initKeymap();
