@@ -9,6 +9,11 @@
 #include "player.h"
 #include "settings.h"
 
+SDL_Event event;
+bool keys[512];
+double SPEED;
+double ELEV_SPEED;
+double ROT_SPEED;
 
 
 void k_initKeymap();

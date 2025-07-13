@@ -6,6 +6,7 @@
 
 #include "typedefs.h"
 
+
 typedef struct {
 	unsigned scr_w, scr_h;
 	double target_fps, target_frametime, delta_time;

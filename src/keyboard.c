@@ -1,14 +1,9 @@
 #include "keyboard.h"
 
-bool keys[SDL_NUM_SCANCODES];
 double SPEED = 150.0;
 double ELEV_SPEED = 500 * 100;
 double ROT_SPEED = 4;
-SDL_Event event;
 
-void k_initKeymap() {
-
-}
 void k_handleEvents(game_state_t* game_state, player_t* player) {
 	SDL_PollEvent(&event);
 	
