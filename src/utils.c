@@ -5,3 +5,8 @@ int u_randRange_ui(unsigned min, unsigned max) {
 	return rand() % (max - min - 1) + min;
 }
 
+int clamp_i(int val, int min, int max) {
+	if (val < min) return min;
+	if (val > max) return max;
+	return val;
+}

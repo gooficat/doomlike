@@ -47,4 +47,10 @@ void k_processKeystates(player_t* player, double deltaTime) {
 	if (keys[move_right]) {
 		player->dir_angle -= ROT_SPEED * deltaTime;
 	}
+	if (keys[move_up]) {
+		player-> z += ELEV_SPEED * deltaTime;
+	}
+	if (keys[move_down]) {
+		player->z -= ELEV_SPEED * deltaTime;
+	}
 }

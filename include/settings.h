@@ -14,5 +14,7 @@ extern SDL_Scancode move_left;
 extern SDL_Scancode move_right;
 extern SDL_Scancode strafe_left;
 extern SDL_Scancode strafe_right;
+extern SDL_Scancode move_up;
+extern SDL_Scancode move_down;
 
 #endif
