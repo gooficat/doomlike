@@ -1,7 +1,7 @@
 #include "settings.h"
 
-unsigned int WIDTH = 640;
-unsigned int HEIGHT = 480;
+unsigned int WIDTH = 1024;
+unsigned int HEIGHT = 768;
 unsigned int FPS = 60;
 double FOV = 200;
 

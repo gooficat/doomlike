@@ -4,9 +4,6 @@
 #define IS_FLOOR 2
 #define IS_WALL 0
 
-#define CEIL_CLR 0x3ac960
-#define FLOOR_CLR 0x1a572a
-
 SDL_Window* window;
 SDL_Renderer* sdl_renderer;
 SDL_Texture* screen_texture;
@@ -15,6 +12,9 @@ unsigned int* screen_buffer;
 int screen_buffer_size;
 
 sector_queue_t sector_queue;
+
+SDL_Surface* textures[32];
+
 
 typedef struct {
 	int ax, bx,
@@ -50,6 +50,8 @@ void r_initScreen(int w, int h) {
 	}
 }
 
+unsigned int* texpix;
+
 void r_init(SDL_Window* main_window, game_state_t *game_state) {
 	window = main_window;
 	scrw = game_state->scr_w;
@@ -58,6 +60,13 @@ void r_init(SDL_Window* main_window, game_state_t *game_state) {
 	sdl_renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED);
 	r_initScreen(scrw, scrh);
 	SDL_RenderSetLogicalSize(sdl_renderer, scrw, scrh);
+
+	IMG_Init(IMG_INIT_PNG);
+
+	textures[0] = IMG_Load("./textures/Acid.png");
+	SDL_UnlockSurface(textures[0]);
+	texpix = (unsigned int*)textures[0]->pixels;
+
 }
 void r_destroy() {
 	if (screen_texture)
@@ -198,7 +207,7 @@ void r_rasterize(rquad_t q, unsigned color, int ceil_floor_wall, plane_lut_t *xy
 				xy_lut->b[x] = y2;
 		}
 		else {
-			r_drawLine(x, y1, x, y2, color);
+			r_drawLine(x, y1, x, y2, texpix[y1/5 * WIDTH/5 + x/5]);
 		}
 	}
 }
