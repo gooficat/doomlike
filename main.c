@@ -21,7 +21,8 @@ static struct player {
     v3 p, v;
     f32 a, l;
 } player = { {50, 250, 20}, {0, 0, 0}, 0, 0 };
-f32 sa, ca;
+f32 sa, ca;//how github feels after hiding THE KEYS IN DEVELOPER SETTINGS WHAT IS WRONG WITH THEM WHY AM I STILL USING GITHUB
+// i would use gitlab but it feels too professional and team-y...
 //you can be a float dont worry
 
 
