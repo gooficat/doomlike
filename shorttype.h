@@ -55,7 +55,7 @@ int clampi(int in, int min, int max) {
 	if (in < min) return min;
 	return in;
 }
-float clampf(float in, float min, float max) {
+double clampf(double in, double min, double max) {
 	if (in > max) return max;
 	if (in < min) return min;
 	return in;
@@ -71,7 +71,7 @@ v2 v2_norm(v2 v) {
 	};
 }
 
-v2 v2_rot(v2 v, float a) {
+v2 v2_rot(v2 v, double a) {
 	double sa = sin(a);
 	double ca = cos(a);
 	return (v2) {
@@ -79,7 +79,7 @@ v2 v2_rot(v2 v, float a) {
 		-v.x * sa - v.y * ca
 	};
 }
-v2i v2i_rot(v2i v, float a) {
+v2i v2i_rot(v2i v, double a) {
 	double sa = sin(a);
 	double ca = cos(a);
 	return (v2i) {
@@ -87,18 +87,18 @@ v2i v2i_rot(v2i v, float a) {
 		-v.x * sa - v.y * ca
 	};
 }
-float v2_dis(v2 v) {
+double v2_dis(v2 v) {
 	return sqrt(
 		(v.x * v.x) + (v.y * v.y)
 	);
 }
 
-float lerpf(float in, float target, float factor) {
+double lerpf(double in, double target, double factor) {
 	return in * (1.0f - factor) + (target * factor);
 }
 
 // v3 v3_norm(v3 v) {
-	// float h = (v.x > v.y) ? v.x : v.y;
+	// double h = (v.x > v.y) ? v.x : v.y;
 	// if (h < v.z) h = v.z;
 	// return (v3) {
 		// v.x/h,
@@ -106,9 +106,9 @@ float lerpf(float in, float target, float factor) {
 		// v.z/h
 	// };
 // }
-/*v3 v3_rotx(v3 v, float a) {
-	float sa = sin(a);
-	float ca = cos(a);
+/*v3 v3_rotx(v3 v, double a) {
+	double sa = sin(a);
+	double ca = cos(a);
 	
 	return (v3) {
 		v.x * ca - v.y * sa,
@@ -116,9 +116,9 @@ float lerpf(float in, float target, float factor) {
 		0
 	};
 }
-v3 v3_roty(v3 v, float a) {
-	float sa = sin(a);
-	float ca = cos(a);
+v3 v3_roty(v3 v, double a) {
+	double sa = sin(a);
+	double ca = cos(a);
 	
 	return (v3) {
 		v.x * ca - v.y * sa,
@@ -126,9 +126,9 @@ v3 v3_roty(v3 v, float a) {
 		0
 	};
 }*/
-v3 v3_rotz(v3 v, float a) {
-	float sa = sin(a);
-	float ca = cos(a);
+v3 v3_rotz(v3 v, double a) {
+	double sa = sin(a);
+	double ca = cos(a);
 	
 	return (v3) {
 		v.x * ca - v.y * sa,
@@ -138,12 +138,18 @@ v3 v3_rotz(v3 v, float a) {
 }
 #else
 int clampi(int in, int min, int max);
-float clampf(float in, float min, float max);
-float lerpf(float in, float target, float factor);
+double clampf(double in, double min, double max);
+double lerpf(double in, double target, double factor);
 
 v2 v2_norm(v2 v);
-v2 v2_rot(v2 v, float a);
+v2 v2_rot(v2 v, double a);
+double v2_dis(v2 v);
 v3 v3_norm(v3 v);
+v3 v3_rotx(v3 v, double a);
+v3 v3_roty(v3 v, double a);
+v3 v3_rotz(v3 v, double a);
+v2i v2i_rot(v2i v, double a);
+
 
 #endif
 

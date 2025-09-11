@@ -12,8 +12,8 @@ please credit if any of this code is used
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 
-unsigned WIDTH = 960;
-unsigned HEIGHT = 540;
+unsigned WIDTH;
+unsigned HEIGHT;
 
 SDL_Window* window;
 SDL_Surface* surface;
@@ -83,6 +83,8 @@ void update(double deltaTime);
 void draw();
 
 int main(int argc, char** argv) {
+	WIDTH = 960;
+	HEIGHT = 540;
 	init(argc, argv);
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);

@@ -20,7 +20,7 @@ typedef struct {
 static struct player {
     v3 p, v;
     f32 a, l;
-} player = { {50, 250, 20}, {0, 0, 0}, 0, 0 };
+} player = { {100, 100, 0}, {0, 0, 0}, 0, 0 };
 f32 sa, ca;//how github feels after hiding THE KEYS IN DEVELOPER SETTINGS WHAT IS WRONG WITH THEM WHY AM I STILL USING GITHUB
 // i would use gitlab but it feels too professional and team-y...
 //you can be a float dont worry
@@ -28,9 +28,9 @@ f32 sa, ca;//how github feels after hiding THE KEYS IN DEVELOPER SETTINGS WHAT I
 
 //time to "optimize"
 v2i verts[] = {
-    {30, 30}, {60, 30}, {90, 60}, {90, 90},
-    {60, 120}, {30, 120}, {0, 90}, {0, 60},
-    {90, 0}, {120, 30}
+    {60, 60}, {120, 60}, {180, 120}, {180, 180},
+    {120, 240}, {60, 240}, {0, 180}, {0, 120},
+    {180, 0}, {240, 60}
 };
 //YOURE ALL INTEGERS NOW
 wall_t walls[] = {
@@ -49,20 +49,21 @@ wall_t walls[] = {
 };
 
 sector_t sectors[] = {
-    {0, 8, 0, 20},
-    {8, 4, 0, 30}//sorry you guys gotta be shorter nw
+    {0, 8, -90, 20},//floors are actually ceilings. i will not fix this. FIGHT ME
+    {8, 4, 70, 20}//sorry you guys gotta be shorter nw
 };
 u8 sector_ct = 2;
 //double cream, strawberries, milk
 void init(int argc, char** argv) {
-    
+    WIDTH = 640;
+    HEIGHT = 480;
 }
 
 void setup() {
-    CLEAR_COLOR = rgb(25, 25, 25);
+    CLEAR_COLOR = rgb(25, 75, 75);
 }
 
-#define P_SPD 0.06
+#define P_SPD 0.1
 void update(double dt) {
     //sleep(16);
     player.v.x = 0;
@@ -78,7 +79,7 @@ void update(double dt) {
         player.v.x++;   
 
     if (keys[SDL_SCANCODE_Q])
-        player.a += dt * 0.001;
+        player.a += dt * 0.002;
     if (keys[SDL_SCANCODE_E])
         player.a -= dt * 0.001;
 
@@ -105,7 +106,7 @@ void update(double dt) {
 void clipBehind(v2i* a, i16* l, i16* h, v2i b) {
  f32 da=a->y;                                 //distance plane -> point a
  f32 db= b.y;                                 //distance plane -> point b
- f32 d=da-db; if (d == 0) d = 1;
+ f32 d=da-db; if (d == 0) d = 0.000001f;//1e-30;
  f32 s = da/(da-db);                         //intersection factor (between 0 and 1)
  a->x = a->x + s*(b.x-(a->x));
  a->y = a->y + s*(b.y-(a->y)); if (/*some people shouldnt be allowed to write code. i mean look at this abysmal spacing. and this is after i cleaned part of it up*/ a->y==0){ a->y=1;} //prevent divide by zero 
@@ -113,7 +114,7 @@ void clipBehind(v2i* a, i16* l, i16* h, v2i b) {
 }
 //i wonder when i'll fix the glitch where stuff goes off to rly far away (not infinity)
 void drawWall(v2i a, v2i b, i16 l, i16 h, u32 c) {
-    line(100 + a.x, 100 + a.y, 100 + b.x, 100 + b.y, c);
+    line(100 + a.x, 100 + a.y, 100 + b.x, 100 + b.y, c/2);
     //*yes im modifying arguments what are you gonna do about it
     a.x -= player.p.x;
     a.y -= player.p.y;
@@ -129,7 +130,7 @@ void drawWall(v2i a, v2i b, i16 l, i16 h, u32 c) {
 //yeah i made this function just for this abomination of a rework. now its all integers ewww
     //for some reason the verts that should clip run away to some far corner. i dont get it
     //it just occured to me that my old wall drawing thingy was possibly so ... nvm
-    if (a.y <= 0 && b.y <= 0) return;
+    if (a.y <= 0 && b.y <= 0) return;//it keeps popping out of existence for some reason
     if (a.x > b.x) {
         v2i swp = a;
         a = b;
